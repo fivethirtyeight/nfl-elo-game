@@ -1,4 +1,4 @@
-# Can You Beat FiveThirtyEight's NFL Predictions? 
+# Can You Beat FiveThirtyEight's NFL Predictions?
 
 This repository contains code and data to accompany FiveThirtyEight's NFL Predictions Game. Specifically, it has:
 
@@ -11,7 +11,7 @@ This repository does not include help on building a predictive model. The goal i
 
 ## Evaluating historical forecasts
 
-`eval.py` in the only runnable script, and does the following:
+`eval.py` is the only runnable script, and does the following:
 
 1. Reads in the CSV of historical games. Each row includes a `elo_prob1` field, which is the probability that `team1` will win the game according to the Elo model.
 2. Fills in a `my_prob1` field for every game using code in `forecast.py`. By default, these are filled in using the exact same Elo model.
@@ -23,7 +23,6 @@ Jump in by running `python eval.py`. You should see the following output:
 
 On average, your forecasts would have gained 0.0 points per season
 
-
 ```
 
 This makes sense — right now it's just running FiveThirtyEight's Elo model against itself, so it gets 0 points for every game.
@@ -33,7 +32,6 @@ Open up `forecast.py`, change the `HFA` (home field advantage) parameter to 100,
 ```
 
 On average, your forecasts would have lost 42.9 points per season
-
 
 ```
 
@@ -49,7 +47,6 @@ Forecasts for upcoming games:
 2017-09-07	NE vs. KC		69% (Elo)		73% (You)
 2017-09-10	CHI vs. ATL		28% (Elo)		31% (You)
 2017-09-10	CIN vs. BAL		63% (Elo)		67% (You)
-
 
 ```
 
