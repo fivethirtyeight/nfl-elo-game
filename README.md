@@ -39,7 +39,7 @@ Okay, looks like changing home field advantage from 65 to 100 points isn't a goo
 
 ## Making 2017 forecasts
 
-Inside the `Util.read_games` function, there is a line you can uncomment to add the 2017 schedule and results to the dataset. If you run `python eval.py` after uncommenting it, you'll see something like the following in the output:
+Inside the `Util.read_games` function, there are three lines you can uncomment to download the 2017 schedule and results to `data/nfl_games_2017.csv`. If you run `python eval.py` after uncommenting it, you'll see something like the following in the output:
 
 ```
 

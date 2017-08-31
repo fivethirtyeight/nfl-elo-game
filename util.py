@@ -1,5 +1,8 @@
 import csv
-import urllib2
+try:
+    from urllib.request import urlretrieve
+except ImportError:
+    from urllib import urlretrieve
 
 class Util:
 
@@ -8,8 +11,10 @@ class Util:
         """ Initializes game objects from csv """
         games = [item for item in csv.DictReader(open(file))]
 
-        # Uncommenting will grab the latest game results for 2017, update team ratings accordingly, and make forecasts for upcoming games
-        #games += [item for item in csv.DictReader(urllib2.urlopen("https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv"))]
+        # Uncommenting these three lines will grab the latest game results for 2017, update team ratings accordingly, and make forecasts for upcoming games
+        #file_2017 = file.replace(".", "_2017.")
+        #urlretrieve("https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv", file_2017)
+        #games += [item for item in csv.DictReader(open(file_2017))]
 
         for game in games:
             game['season'], game['neutral'], game['playoff'] = int(game['season']), int(game['neutral']), int(game['playoff'])
@@ -46,15 +51,15 @@ class Util:
 
         # Print individual seasons
         for season in points_by_season:
-            print "In %s, your forecasts would have %s %s points" % (season, "gained" if points_by_season[season] >= 0 else "lost", abs(round(points_by_season[season], 1)))
+            print("In %s, your forecasts would have %s %s points" % (season, "gained" if points_by_season[season] >= 0 else "lost", abs(round(points_by_season[season], 1))))
 
         # Print forecasts for upcoming games
         if len(upcoming_games) > 0:
-            print "\nForecasts for upcoming games:"
+            print("\nForecasts for upcoming games:")
             for game in upcoming_games:
-                print "%s\t%s vs. %s\t\t%s%% (Elo)\t\t%s%% (You)" % (game['date'], game['team1'], game['team2'], int(round(100*game['elo_prob1'])), int(round(100*game['my_prob1'])))
+                print("%s\t%s vs. %s\t\t%s%% (Elo)\t\t%s%% (You)" % (game['date'], game['team1'], game['team2'], int(round(100*game['elo_prob1'])), int(round(100*game['my_prob1']))))
 
         # Show overall performance
         avg = sum(points_by_season.values())/len(points_by_season.values())
-        print "\nOn average, your forecasts would have %s %s points per season\n" % ("gained" if avg >= 0 else "lost", abs(round(avg, 1)))
+        print("\nOn average, your forecasts would have %s %s points per season\n" % ("gained" if avg >= 0 else "lost", abs(round(avg, 1))))
 
