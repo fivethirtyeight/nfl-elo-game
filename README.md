@@ -5,7 +5,7 @@ This repository contains code and data to accompany FiveThirtyEight's NFL Predic
 * Historical NFL scores back to 1920 in `data/nfl_games.csv`, with FiveThirtyEight's Elo win probabilities for each game
 * Code to generate the Elo win probabilities contained in the data
 * Code to evaluate alternate forecasts against Elo using the historical data and the rules of our game
-* Game schedule and results from the 2017 season
+* Game schedule and results from the [2017 season](https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv)
 
 This repository does not include help on building a predictive model. The goal is mostly to be 100% transparent about how FiveThirtyEight's NFL Elo model works, how forecasts are scored in our game, and to provide a loose framework for evaluating forecasts against historical data.
 
