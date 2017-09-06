@@ -26,7 +26,7 @@ class Util:
     @staticmethod
     def evaluate_forecasts(games):
         """ Evaluates and scores forecasts in the my_prob1 field against those in the elo_prob1 field for each game """
-        points_by_season = {}
+        my_points_by_season, elo_points_by_season = {}, {}
 
         forecasted_games = [g for g in games if g['result1'] != None]
         upcoming_games = [g for g in games if g['result1'] == None and 'my_prob1' in g]
@@ -38,28 +38,34 @@ class Util:
             if game['result1'] == None or game['result1'] == 0.5:
                 continue
 
-            if game['season'] not in points_by_season:
-                points_by_season[game['season']] = 0.0
+            if game['season'] not in elo_points_by_season:
+                elo_points_by_season[game['season']] = 0.0
+                my_points_by_season[game['season']] = 0.0
 
-            # Calculate points for game
-            elo_brier = (game['result1'] - game['elo_prob1']) * (game['result1'] - game['elo_prob1'])
-            my_brier = (game['result1'] - game['my_prob1']) * (game['result1'] - game['my_prob1'])
-            points = ((1.0 - my_brier) - (1.0 - elo_brier)) * 100
+            # Calculate elo's points for game
+            elo_points = round(100-(100*(round(game['elo_prob1'], 2)-game['result1'])*(round(game['elo_prob1'], 2)-game['result1']))-75, 2)
             if game['playoff'] == 1:
-                points *= 2
-            points_by_season[game['season']] += points
+                elo_points *= 2
+            elo_points_by_season[game['season']] += elo_points
+
+            # Calculate my points for game
+            my_points = round(100-(100*(round(game['my_prob1'], 2)-game['result1'])*(round(game['my_prob1'], 2)-game['result1']))-75, 2)
+            if game['playoff'] == 1:
+                my_points *= 2
+            my_points_by_season[game['season']] += my_points
 
         # Print individual seasons
-        for season in points_by_season:
-            print("In %s, your forecasts would have %s %s points" % (season, "gained" if points_by_season[season] >= 0 else "lost", abs(round(points_by_season[season], 1))))
+        for season in my_points_by_season:
+            print("In %s, your forecasts would have gotten %s points. Elo got %s points." % (season, round(my_points_by_season[season], 2), round(elo_points_by_season[season], 2)))
+
+        # Show overall performance
+        my_avg = sum(my_points_by_season.values())/len(my_points_by_season.values())
+        elo_avg = sum(elo_points_by_season.values())/len(elo_points_by_season.values())
+        print("\nOn average, your forecasts would have gotten %s points per season. Elo got %s points per season.\n" % (round(my_avg, 2), round(elo_avg, 2)))
 
         # Print forecasts for upcoming games
         if len(upcoming_games) > 0:
-            print("\nForecasts for upcoming games:")
+            print("Forecasts for upcoming games:")
             for game in upcoming_games:
                 print("%s\t%s vs. %s\t\t%s%% (Elo)\t\t%s%% (You)" % (game['date'], game['team1'], game['team2'], int(round(100*game['elo_prob1'])), int(round(100*game['my_prob1']))))
-
-        # Show overall performance
-        avg = sum(points_by_season.values())/len(points_by_season.values())
-        print("\nOn average, your forecasts would have %s %s points per season\n" % ("gained" if avg >= 0 else "lost", abs(round(avg, 1))))
-
+            print("")
