@@ -45,18 +45,18 @@ class Util:
             # Calculate elo's points for game
             rounded_elo_prob = round(game['elo_prob1'], 2)
             elo_brier = (rounded_elo_prob - game['result1']) * (rounded_elo_prob - game['result1'])
-            elo_points = 100 - (100 * elo_brier) - 75
+            elo_points = round(25 - (100 * elo_brier), 1)
             if game['playoff'] == 1:
                 elo_points *= 2
-            elo_points_by_season[game['season']] += round(elo_points, 2)
+            elo_points_by_season[game['season']] += elo_points
 
             # Calculate my points for game
             rounded_my_prob = round(game['my_prob1'], 2)
             my_brier = (rounded_my_prob - game['result1']) * (rounded_my_prob - game['result1'])
-            my_points = 100 - (100 * my_brier) - 75
+            my_points = round(25 - (100 * my_brier), 1)
             if game['playoff'] == 1:
                 my_points *= 2
-            my_points_by_season[game['season']] += round(my_points, 2)
+            my_points_by_season[game['season']] += my_points
 
         # Print individual seasons
         for season in my_points_by_season:

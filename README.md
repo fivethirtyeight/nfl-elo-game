@@ -21,7 +21,7 @@ Jump in by running `python eval.py`. You should see the following output:
 
 ```
 
-On average, your forecasts would have gotten 641.79 points per season. Elo got 641.79 points per season.
+On average, your forecasts would have gotten 642.08 points per season. Elo got 642.08 points per season.
 
 ```
 
@@ -31,7 +31,7 @@ Open up `forecast.py`, change the `HFA` (home field advantage) parameter to 100,
 
 ```
 
-On average, your forecasts would have gotten 601.93 points per season. Elo got 641.79 points per season.
+On average, your forecasts would have gotten 602.25 points per season. Elo got 642.08 points per season.
 
 ```
 
