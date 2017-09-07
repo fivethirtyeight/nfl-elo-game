@@ -1,13 +1,13 @@
 # Can You Beat FiveThirtyEight's NFL Predictions?
 
-This repository contains code and data to accompany FiveThirtyEight's NFL Predictions Game. Specifically, it has:
+This repository contains code and data to accompany FiveThirtyEight's NFL Predictions game. Specifically, it has:
 
-* Historical NFL scores back to 1920 in `data/nfl_games.csv`, with FiveThirtyEight's Elo win probabilities for each game
-* Code to generate the Elo win probabilities contained in the data
-* Code to evaluate alternate forecasts against Elo using the historical data and the rules of our game
-* Game schedule and results from the [2017 season](https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv)
+* Historical NFL scores back to 1920 in `data/nfl_games.csv`, with FiveThirtyEight's Elo win probabilities for each game.
+* Code to generate the Elo win probabilities contained in the data.
+* Code to evaluate alternative forecasts against Elo using the historical data and the rules of our game.
+* Game schedule and results from the [2017-18 season](https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv)
 
-This repository does not include help on building a predictive model. The goal is mostly to be 100% transparent about how FiveThirtyEight's NFL Elo model works, how forecasts are scored in our game, and to provide a loose framework for evaluating forecasts against historical data.
+Our goal in providing this repository is for people to be able to figure out how FiveThirtyEight's NFL Elo model and NFL predictions game work and to provide a loose framework for evaluating forecasts against historical data. This repository does not include assistance in building a predictive model.
 
 ## Evaluating historical forecasts
 
@@ -27,7 +27,7 @@ On average, your forecasts would have gotten 642.08 points per season. Elo got 6
 
 This makes sense — right now it's just running FiveThirtyEight's Elo model against itself, so it gets the same number of points for every game.
 
-Open up `forecast.py`, change the `HFA` (home field advantage) parameter to 100, and rerun `python eval.py`. You should see:
+Open up `forecast.py`, change the `HFA` (home-field advantage) parameter to 100, and rerun `python eval.py`. You should see:
 
 ```
 
@@ -35,7 +35,7 @@ On average, your forecasts would have gotten 602.25 points per season. Elo got 6
 
 ```
 
-Okay, looks like changing home field advantage from 65 to 100 points isn't a good idea. With that tweak, our generated probabilities perform worse historically than the official FiveThirtyEight Elo probabilities.
+OK, looks like changing home-field advantage from 65 to 100 points isn't a good idea. With that tweak, our generated probabilities perform worse historically than the official FiveThirtyEight Elo probabilities.
 
 ## Making 2017 forecasts
 
