@@ -11,5 +11,6 @@ if (!require(mvglmmRank)) {
   install.packages("mvglmmRank")
   library(mvglmmRank)
 }
-nfl_games <- read_csv("data/nfl_games.csv")
+nfl_games <- read_csv("../data/nfl_games.csv")
+View(nfl_games)
 ```

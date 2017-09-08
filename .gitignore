@@ -1,5 +1,5 @@
 *.pyc
 data/nfl_games_2017.csv
 .Rproj.user
-README.html
+*.html
 .Rhistory
