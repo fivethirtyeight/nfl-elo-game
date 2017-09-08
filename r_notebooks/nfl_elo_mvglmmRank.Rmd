@@ -36,6 +36,7 @@ game_data <- nfl_games %>%
     binary.response,
     neutral.site
   )
+View(game_data)
 rank_model <- build_model(
   game_data, 
   method = "PB1", 
