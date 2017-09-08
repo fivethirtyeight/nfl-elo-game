@@ -1,0 +1,15 @@
+---
+title: "538 Elo NFL Analysis - mvglmmRank Test"
+output: html_notebook
+---
+
+## Load the library and data
+
+```{r}
+library(tidyverse)
+if (!require(mvglmmRank)) {
+  install.packages("mvglmmRank")
+  library(mvglmmRank)
+}
+nfl_games <- read_csv("data/nfl_games.csv")
+```
