@@ -39,7 +39,7 @@ game_data <- nfl_games %>%
 View(game_data)
 rank_model <- build_model(
   game_data, 
-  method = "NB", 
+  method = "PB0", 
   first.order = FALSE,
   OT.flag = FALSE
 )
