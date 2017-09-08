@@ -3,10 +3,11 @@ title: "538 Elo NFL Analysis - mvglmmRank Test"
 output: html_notebook
 ---
 
-## Load the library and data
+## Load the libraries and data
 
 ```{r}
 library(tidyverse)
+library(dfstools)
 if (!require(mvglmmRank)) {
   install.packages("mvglmmRank")
   library(mvglmmRank)
@@ -14,3 +15,32 @@ if (!require(mvglmmRank)) {
 nfl_games <- read_csv("../data/nfl_games.csv")
 View(nfl_games)
 ```
+
+## Build the model
+```{r}
+game_data <- nfl_games %>%
+  filter(season >= 2012) %>%
+  mutate(
+    home = paste(team1, season, sep = "_"),
+    away = paste(team2, season, sep = "_"),
+    home.response = score1,
+    away.response = score2,
+    binary.response = result1,
+    neutral.site = neutral
+  ) %>%
+  select(
+    home, 
+    away, 
+    home.response, 
+    away.response,
+    binary.response,
+    neutral.site
+  )
+rank_model <- build_model(
+  game_data, 
+  method = "PB1", 
+  first.order = FALSE,
+  OT.flag = FALSE
+)
+```
+
