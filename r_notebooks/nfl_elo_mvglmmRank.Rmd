@@ -19,13 +19,12 @@ View(nfl_games)
 ## Build the model
 ```{r}
 game_data <- nfl_games %>%
-  filter(season >= 2016) %>%
+  filter(season == 2016) %>%
   mutate(
-    home = paste(team1, season, sep = "_"),
-    away = paste(team2, season, sep = "_"),
+    home = team1,
+    away = team2,
     home.response = score1,
     away.response = score2,
-    binary.response = result1,
     neutral.site = neutral
   ) %>%
   select(
@@ -33,15 +32,32 @@ game_data <- nfl_games %>%
     away, 
     home.response, 
     away.response,
-    binary.response,
     neutral.site
   )
 View(game_data)
 rank_model <- build_model(
   game_data, 
-  method = "PB0", 
+  method = "PB1", 
   first.order = FALSE,
   OT.flag = FALSE
 )
+```
+
+## Predictions
+```{r}
+game.pred(rank_model, away = "ARI", home = "DET")
+game.pred(rank_model, away = "ATL", home = "CHI")
+game.pred(rank_model, away = "BAL", home = "CIN")
+game.pred(rank_model, away = "JAX", home = "HOU")
+game.pred(rank_model, away = "NYJ", home = "BUF")
+game.pred(rank_model, away = "OAK", home = "TEN")
+game.pred(rank_model, away = "PHI", home = "WSH")
+game.pred(rank_model, away = "PIT", home = "CLE")
+game.pred(rank_model, away = "IND", home = "LAR")
+game.pred(rank_model, away = "CAR", home = "SF")
+game.pred(rank_model, away = "SEA", home = "GB")
+game.pred(rank_model, away = "NYG", home = "DAL")
+game.pred(rank_model, away = "NO", home = "MIN")
+game.pred(rank_model, away = "LAC", home = "DEN")
 ```
 
