@@ -1,0 +1,63 @@
+---
+title: "538 Elo NFL Analysis - mvglmmRank Test"
+output: html_notebook
+---
+
+## Load the libraries and data
+
+```{r}
+library(tidyverse)
+library(dfstools)
+if (!require(mvglmmRank)) {
+  install.packages("mvglmmRank")
+  library(mvglmmRank)
+}
+nfl_games <- read_csv("../data/nfl_games.csv")
+View(nfl_games)
+```
+
+## Build the model
+```{r}
+game_data <- nfl_games %>%
+  filter(season == 2016) %>%
+  mutate(
+    home = team1,
+    away = team2,
+    home.response = score1,
+    away.response = score2,
+    neutral.site = neutral
+  ) %>%
+  select(
+    home, 
+    away, 
+    home.response, 
+    away.response,
+    neutral.site
+  )
+View(game_data)
+rank_model <- build_model(
+  game_data, 
+  method = "PB1", 
+  first.order = FALSE,
+  OT.flag = FALSE
+)
+```
+
+## Predictions
+```{r}
+game.pred(rank_model, away = "ARI", home = "DET")
+game.pred(rank_model, away = "ATL", home = "CHI")
+game.pred(rank_model, away = "BAL", home = "CIN")
+game.pred(rank_model, away = "JAX", home = "HOU")
+game.pred(rank_model, away = "NYJ", home = "BUF")
+game.pred(rank_model, away = "OAK", home = "TEN")
+game.pred(rank_model, away = "PHI", home = "WSH")
+game.pred(rank_model, away = "PIT", home = "CLE")
+game.pred(rank_model, away = "IND", home = "LAR")
+game.pred(rank_model, away = "CAR", home = "SF")
+game.pred(rank_model, away = "SEA", home = "GB")
+game.pred(rank_model, away = "NYG", home = "DAL")
+game.pred(rank_model, away = "NO", home = "MIN")
+game.pred(rank_model, away = "LAC", home = "DEN")
+```
+
