@@ -38,6 +38,10 @@ class Util:
             if game['result1'] == None or game['result1'] == 0.5:
                 continue
 
+            # Don't count the 2017 NE/KC game because it wasn't included in our game
+            if game['date'] == '2017-09-07':
+              continue
+
             if game['season'] not in elo_points_by_season:
                 elo_points_by_season[game['season']] = 0.0
                 my_points_by_season[game['season']] = 0.0
@@ -45,7 +49,8 @@ class Util:
             # Calculate elo's points for game
             rounded_elo_prob = round(game['elo_prob1'], 2)
             elo_brier = (rounded_elo_prob - game['result1']) * (rounded_elo_prob - game['result1'])
-            elo_points = round(25 - (100 * elo_brier), 1)
+            elo_points = 25 - (100 * elo_brier)
+            elo_points = round(elo_points + 0.001 if elo_points < 0 else elo_points, 1) # Round half up
             if game['playoff'] == 1:
                 elo_points *= 2
             elo_points_by_season[game['season']] += elo_points
@@ -53,7 +58,8 @@ class Util:
             # Calculate my points for game
             rounded_my_prob = round(game['my_prob1'], 2)
             my_brier = (rounded_my_prob - game['result1']) * (rounded_my_prob - game['result1'])
-            my_points = round(25 - (100 * my_brier), 1)
+            my_points = 25 - (100 * my_brier)
+            my_points = round(my_points + 0.001 if my_points < 0 else my_points, 1) # Round half up
             if game['playoff'] == 1:
                 my_points *= 2
             my_points_by_season[game['season']] += my_points
