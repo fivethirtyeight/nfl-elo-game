@@ -1,14 +1,14 @@
 # Can You Beat FiveThirtyEight's NFL Predictions?
 
-This repository contains code and data to accompany [FiveThirtyEight's NFL Predictions game](https://projects.fivethirtyeight.com/nfl-predictions-game/). Specifically, it has:
+This repository contains code and data to accompany [FiveThirtyEight's NFL Forecasting game](https://projects.fivethirtyeight.com/2018-nfl-forecasting-game/). Specifically, it has:
 
 * Historical NFL scores back to 1920 in `data/nfl_games.csv`, with FiveThirtyEight's Elo win probabilities for each game.
 * Code to generate the Elo win probabilities contained in the data.
 * Code to evaluate alternative forecasts against Elo using the historical data and the rules of our game.
-* Game schedule and results from the [2017-18 season](https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv).
-* [Anonymized reader forecasts](https://projects.fivethirtyeight.com/nfl-api/2017/raw_user_forecasts.csv) for completed 2017-18 games.
+* Game schedule and results from the [2018-19 season](https://projects.fivethirtyeight.com/nfl-api/2018/nfl_games_2018.csv).
+* [Reader forecasts](https://projects.fivethirtyeight.com/nfl-api/2017/raw_user_forecasts.csv) from our 2017-18 forecasting game.
 
-Our goal in providing this repository is for people to be able to figure out how FiveThirtyEight's NFL Elo model and NFL predictions game work and to provide a loose framework for evaluating forecasts against historical data. This repository does not include assistance in building a predictive model.
+Our goal in providing this repository is for people to be able to figure out how FiveThirtyEight's NFL Elo model and NFL forecasting game work and to provide a loose framework for evaluating forecasts against historical data. This repository does not include assistance in building a predictive model.
 
 ## Evaluating historical forecasts
 
@@ -22,7 +22,7 @@ Jump in by running `python eval.py`. You should see the following output:
 
 ```
 
-On average, your forecasts would have gotten 642.61 points per season. Elo got 642.61 points per season.
+On average, your forecasts would have gotten 645.16 points per season. Elo got 645.16 points per season.
 
 ```
 
@@ -32,26 +32,26 @@ Open up `forecast.py`, change the `HFA` (home-field advantage) parameter to 100,
 
 ```
 
-On average, your forecasts would have gotten 602.78 points per season. Elo got 642.61 points per season.
+On average, your forecasts would have gotten 604.59 points per season. Elo got 645.16 points per season.
 
 ```
 
 OK, looks like changing home-field advantage from 65 to 100 points isn't a good idea. With that tweak, our generated probabilities perform worse historically than the official FiveThirtyEight Elo probabilities.
 
-## Making 2017 forecasts
+## Making 2018 forecasts
 
-Inside the `Util.read_games` function, there are three lines you can uncomment to download the 2017 schedule and results to `data/nfl_games_2017.csv`. If you run `python eval.py` after uncommenting them, you'll see something like the following in the output:
+Inside the `Util.read_games` function, there are three lines you can uncomment to download the 2018 schedule and results to `data/nfl_games_2018.csv`. If you run `python eval.py` after uncommenting them, you'll see something like the following in the output:
 
 ```
 
 Forecasts for upcoming games:
-2017-09-07	NE vs. KC		69% (Elo)		73% (You)
-2017-09-10	CHI vs. ATL		28% (Elo)		31% (You)
-2017-09-10	CIN vs. BAL		63% (Elo)		67% (You)
+2018-09-06	PHI vs. ATL		65% (Elo)		69% (You)
+2018-09-09	BAL vs. BUF		64% (Elo)		68% (You)
+2018-09-09	NYG vs. JAX		42% (Elo)		46% (You)
 
 ```
 
-The scripts are now maintaining Elo ratings through the 2017 season, and printing forecasts (both from `elo_prob1` and from `my_prob1`) for upcoming games. Note that our model is more confident in the home team in every game because we've adjusted the `HFA` parameter to 100.
+The scripts are now maintaining Elo ratings through the 2018 season, and printing forecasts (both from `elo_prob1` and from `my_prob1`) for upcoming games. Note that our model is more confident in the home team in every game because we've adjusted the `HFA` parameter to 100.
 
 ## More
 

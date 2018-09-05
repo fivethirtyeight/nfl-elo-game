@@ -11,10 +11,10 @@ class Util:
         """ Initializes game objects from csv """
         games = [item for item in csv.DictReader(open(file))]
 
-        # Uncommenting these three lines will grab the latest game results for 2017, update team ratings accordingly, and make forecasts for upcoming games
-        #file_2017 = file.replace(".", "_2017.")
-        #urlretrieve("https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv", file_2017)
-        #games += [item for item in csv.DictReader(open(file_2017))]
+        # Uncommenting these three lines will grab the latest game results for 2018, update team ratings accordingly, and make forecasts for upcoming games
+        #file_2018 = file.replace(".", "_2018.")
+        #urlretrieve("https://projects.fivethirtyeight.com/nfl-api/2018/nfl_games_2018.csv", file_2018)
+        #games += [item for item in csv.DictReader(open(file_2018))]
 
         for game in games:
             game['season'], game['neutral'], game['playoff'] = int(game['season']), int(game['neutral']), int(game['playoff'])
@@ -37,10 +37,6 @@ class Util:
             # Skip unplayed games and ties
             if game['result1'] == None or game['result1'] == 0.5:
                 continue
-
-            # Don't count the 2017 NE/KC game because it wasn't included in our game
-            if game['date'] == '2017-09-07':
-              continue
 
             if game['season'] not in elo_points_by_season:
                 elo_points_by_season[game['season']] = 0.0
