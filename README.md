@@ -6,6 +6,7 @@ This repository contains code and data to accompany [FiveThirtyEight's NFL Forec
 * Code to generate the Elo win probabilities contained in the data.
 * Code to evaluate alternative forecasts against Elo using the historical data and the rules of our game.
 * Game schedule and results from the [2018-19 season](https://projects.fivethirtyeight.com/nfl-api/2018/nfl_games_2018.csv).
+* [Reader forecasts](https://projects.fivethirtyeight.com/nfl-api/2018/raw_user_forecasts.csv) from our 2018-19 forecasting game.
 * [Reader forecasts](https://projects.fivethirtyeight.com/nfl-api/2017/raw_user_forecasts.csv) from our 2017-18 forecasting game.
 
 Our goal in providing this repository is for people to be able to figure out how FiveThirtyEight's NFL Elo model and NFL forecasting game work and to provide a loose framework for evaluating forecasts against historical data. This repository does not include assistance in building a predictive model.
