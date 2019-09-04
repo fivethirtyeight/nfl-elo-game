@@ -1,3 +1,2 @@
 *.pyc
-data/nfl_games_2017.csv
-data/nfl_games_2018.csv
+data/nfl_games_20*

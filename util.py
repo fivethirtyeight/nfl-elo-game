@@ -11,10 +11,10 @@ class Util:
         """ Initializes game objects from csv """
         games = [item for item in csv.DictReader(open(file))]
 
-        # Uncommenting these three lines will grab the latest game results for 2018, update team ratings accordingly, and make forecasts for upcoming games
-        #file_2018 = file.replace(".", "_2018.")
-        #urlretrieve("https://projects.fivethirtyeight.com/nfl-api/2018/nfl_games_2018.csv", file_2018)
-        #games += [item for item in csv.DictReader(open(file_2018))]
+        # Uncommenting these three lines will grab the latest game results for 2019, update team ratings accordingly, and make forecasts for upcoming games
+        #file_2019 = file.replace(".", "_2019.")
+        #urlretrieve("https://projects.fivethirtyeight.com/nfl-api/2019/nfl_games_2019.csv", file_2019)
+        #games += [item for item in csv.DictReader(open(file_2019))]
 
         for game in games:
             game['season'], game['neutral'], game['playoff'] = int(game['season']), int(game['neutral']), int(game['playoff'])
