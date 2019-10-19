@@ -9,3 +9,4 @@ Forecast.forecast(games)
 
 # Evaluate our forecasts against Elo
 Util.evaluate_forecasts(games)
+input()
