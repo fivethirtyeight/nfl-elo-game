@@ -33,7 +33,7 @@ class Forecast:
                     if k in REVERSIONS:
                         team['elo'] = REVERSIONS[k]
                     else:
-                        team['elo'] = 1505.0*REVERT + team['elo']*(1-REVERT)
+                        team['elo'] = 1500.0*REVERT + team['elo']*(1-REVERT)
                 team['season'] = game['season']
 
             # Elo difference includes home field advantage
@@ -41,14 +41,14 @@ class Forecast:
 
             # This is the most important piece, where we set my_prob1 to our forecasted probability
             if game['elo_prob1'] != None:
-                game['my_prob1'] = 1.0 / (math.pow(10.0, (-elo_diff/400.0)) + 1.0)
+                game['my_prob1'] = elo_diff/4
 
             # If game was played, maintain team Elo ratings
             if game['score1'] != None:
 
                 # Margin of victory is used as a K multiplier
                 pd = abs(game['score1'] - game['score2'])
-                mult = math.log(max(pd, 1) + 1.0) * (2.2 / (1.0 if game['result1'] == 0.5 else ((elo_diff if game['result1'] == 1.0 else -elo_diff) * 0.001 + 2.2)))
+                mult = math.log (2.2 / (1.0 if game['result1'] == 0.5 else ((elo_diff if game['result1'] == 1.0 else -elo_diff) * 0.001 + 2.2)))
 
                 # Elo shift based on K and the margin of victory multiplier
                 shift = (K * mult) * (game['result1'] - game['my_prob1'])
