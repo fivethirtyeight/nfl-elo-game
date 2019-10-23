@@ -1,6 +1,5 @@
 # Can You Beat FiveThirtyEight's NFL Predictions?
-
-- This repository contains code and data to accompany [FiveThirtyEight's NFL Forecasting game](https://projects.fivethirtyeight.com/2019-nfl-forecasting-game/). Specifically, it has:
+ This repository contains code and data to accompany [FiveThirtyEight's NFL Forecasting game](https://projects.fivethirtyeight.com/2019-nfl-forecasting-game/). Specifically, it has:
 
 * Historical NFL scores back to 1920 in `data/nfl_games.csv`, with FiveThirtyEight's Elo win probabilities for each game.
 * Code to generate the Elo win probabilities contained in the data.
