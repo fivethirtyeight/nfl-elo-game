@@ -1,11 +1,12 @@
 # Can You Beat FiveThirtyEight's NFL Predictions?
 
-This repository contains code and data to accompany [FiveThirtyEight's NFL Forecasting game](https://projects.fivethirtyeight.com/2019-nfl-forecasting-game/). Specifically, it has:
+This repository contains code and data to accompany [FiveThirtyEight's NFL Forecasting game](https://projects.fivethirtyeight.com/2021-nfl-forecasting-game/). Specifically, it has:
 
 * Historical NFL scores back to 1920 in `data/nfl_games.csv`, with FiveThirtyEight's Elo win probabilities for each game.
 * Code to generate the Elo win probabilities contained in the data.
 * Code to evaluate alternative forecasts against Elo using the historical data and the rules of our game.
-* Game schedule and results from the [2019-20 season](https://projects.fivethirtyeight.com/nfl-api/2019/nfl_games_2019.csv).
+* Game schedule and results from the [2021-22 season](https://projects.fivethirtyeight.com/nfl-api/2021/nfl_games_2021.csv).
+* [Reader forecasts](https://projects.fivethirtyeight.com/nfl-api/2021/raw_user_forecasts.csv) from our 2021-22 forecasting game.
 * [Reader forecasts](https://projects.fivethirtyeight.com/nfl-api/2019/raw_user_forecasts.csv) from our 2019-20 forecasting game.
 * [Reader forecasts](https://projects.fivethirtyeight.com/nfl-api/2018/raw_user_forecasts.csv) from our 2018-19 forecasting game.
 * [Reader forecasts](https://projects.fivethirtyeight.com/nfl-api/2017/raw_user_forecasts.csv) from our 2017-18 forecasting game.
@@ -24,7 +25,7 @@ Jump in by running `python eval.py`. You should see the following output:
 
 ```
 
-On average, your forecasts would have gotten 645.9 points per season. Elo got 645.9 points per season.
+On average, your forecasts would have gotten 648.24 points per season. Elo got 648.24 points per season.
 
 ```
 
@@ -34,26 +35,26 @@ Open up `forecast.py`, change the `HFA` (home-field advantage) parameter to 100,
 
 ```
 
-On average, your forecasts would have gotten 605.15 points per season. Elo got 645.9 points per season.
+On average, your forecasts would have gotten 603.42 points per season. Elo got 645.9 points per season.
 
 ```
 
 OK, looks like changing home-field advantage from 65 to 100 points isn't a good idea. With that tweak, our generated probabilities perform worse historically than the official FiveThirtyEight Elo probabilities.
 
-## Making 2019 forecasts
+## Making 2021 forecasts
 
-Inside the `Util.read_games` function, there are three lines you can uncomment to download the 2019 schedule and results to `data/nfl_games_2019.csv`. If you run `python eval.py` after uncommenting them, you'll see something like the following in the output:
+Inside the `Util.read_games` function, there are three lines you can uncomment to download the 2021 schedule and results to `data/nfl_games_2021.csv`. If you run `python eval.py` after uncommenting them, you'll see something like the following in the output:
 
 ```
 
 Forecasts for upcoming games:
-2019-09-05	CHI vs. GB		76% (Elo)		76% (You)
-2019-09-08	PHI vs. WSH		77% (Elo)		77% (You)
-2019-09-08	JAX vs. KC		38% (Elo)		38% (You)
+2021-09-09	TB vs. DAL		82% (Elo)		86% (You)
+2021-09-12	IND vs. SEA		59% (Elo)		64% (You)
+2021-09-12	BUF vs. PIT		73% (Elo)		77% (You)
 
 ```
 
-The scripts are now maintaining Elo ratings through the 2019 season, and printing forecasts (both from `elo_prob1` and from `my_prob1`) for upcoming games. Note that our model is more confident in the home team in every game because we've adjusted the `HFA` parameter to 100.
+The scripts are now maintaining Elo ratings through the 2021 season, and printing forecasts (both from `elo_prob1` and from `my_prob1`) for upcoming games. Note that our model is more confident in the home team in every game because we've adjusted the `HFA` parameter to 100.
 
 ## More
 
