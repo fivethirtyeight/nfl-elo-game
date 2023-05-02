@@ -1,2 +1,5 @@
 *.pyc
-data/nfl_games_20*
+.vscode/
+__pycache__
+.ipynb_checkpoints
+
